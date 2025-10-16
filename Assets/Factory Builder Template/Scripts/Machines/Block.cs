@@ -109,5 +109,16 @@ namespace FactoryBuilderTemplate
                 gameObject.GetComponent<Rigidbody>().velocity = moveSpeed * moveDirection * Time.deltaTime;
             }
         }
+        private void OnCollisionStay(Collision collision)
+        {
+            ConveyorBelt beltObj = collision.gameObject.GetComponent<ConveyorBelt>();
+            if (beltObj != null)
+            {
+                moveSpeed = beltObj.speed;
+                moveDirection = beltObj.direction;
+                gameObject.GetComponent<Rigidbody>().transform.Translate(moveSpeed * moveDirection * Time.deltaTime);
+                //gameObject.GetComponent<Rigidbody>().velocity = moveSpeed * moveDirection * Time.deltaTime;
+            }
+        }
     }
 }

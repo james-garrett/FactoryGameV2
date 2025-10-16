@@ -21,7 +21,7 @@ namespace FactoryBuilderTemplate
         //[HideInInspector]
         //public List<MachineOutput> Outputs;
 
-        public IOHub InputOutputHub = new IOHub();
+        public IOHub InputOutputHub;
 
         public enum MachineType
         {
@@ -39,6 +39,7 @@ namespace FactoryBuilderTemplate
         protected void Awake()
         {
             AllMachines.Add(this);
+            InputOutputHub = new IOHub();
         }
 
         protected void OnDestroy()
@@ -91,7 +92,7 @@ namespace FactoryBuilderTemplate
             if(connectedTo != null)
             {
                 //try to find proper machine input
-                foreach(MachineInput input in connectedTo.InputOutputHub.Inputs)
+                foreach(MachineInput input in connectedTo.InputOutputHub.Inputs())
                 {
                     if(input.name == inputName)
                     {

@@ -28,6 +28,11 @@ namespace FactoryBuilderTemplate
             }
         }
 
+        public MachineInput()
+        {
+
+        }
+
         public void OnTriggerEnter(Collider other)
         {
             Block block = other.gameObject.GetComponent<Block>();

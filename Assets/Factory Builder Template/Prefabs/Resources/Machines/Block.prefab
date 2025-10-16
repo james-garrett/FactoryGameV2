@@ -54,6 +54,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -91,7 +92,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8022144198759469191}
-  m_Material: {fileID: 13400000, guid: d0b4af0ab78f8c247b5c492a51df6c2f, type: 2}
+  m_Material: {fileID: 13400000, guid: 90ee2c69a98478c4d8db378395080611, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -125,13 +126,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8a0cd0116a6eb44c8d1446c337684a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Inputs: []
-  Outputs: []
   Type: 0
   PrefabName: Block
   ItemDef: {fileID: 11400000, guid: f22e224373958cd438f99b92ac58df11, type: 2}
   Item:
     ItemDefinitionID: 0
+  moveSpeed: 0
+  moveDirection: {x: 0, y: 0, z: 0}
   IsInfinite: 0
   Amount: 1
   OnOreEnd:

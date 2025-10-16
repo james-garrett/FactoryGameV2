@@ -48,7 +48,7 @@ namespace FactoryBuilderTemplate
         void Start()
         {
             //register machine IO
-            InputOutputHub.Outputs.Add(Output);
+            InputOutputHub.Outputs().Add(Output);
 
             //grab inventory reference
             inventory = GetComponent<Inventory>();
@@ -201,10 +201,10 @@ namespace FactoryBuilderTemplate
             data.InventoryData = inventory.Save();
 
             //save output connection
-            if(InputOutputHub.Outputs[0].ConnectedTo != null)
+            if(InputOutputHub.Outputs()[0].ConnectedTo != null)
             {
-                data.OutputConnectedToMachineInputID = InputOutputHub.Outputs[0].ConnectedTo.Parent.GetMachineID();
-                data.OutputConnectedToInputGameObjectName = InputOutputHub.Outputs[0].ConnectedTo.name;
+                data.OutputConnectedToMachineInputID = InputOutputHub.Outputs()[0].ConnectedTo.Parent.GetMachineID();
+                data.OutputConnectedToInputGameObjectName = InputOutputHub.Outputs()[0].ConnectedTo.name;
             }
 
             return JsonUtility.ToJson(data);

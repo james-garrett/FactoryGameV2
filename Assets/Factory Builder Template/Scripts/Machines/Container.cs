@@ -27,10 +27,10 @@ namespace FactoryBuilderTemplate
         void Start()
         {
             //register machine IO
-            InputOutputHub.Inputs = new List<MachineInput>();
-            InputOutputHub.Outputs = new List<MachineOutput>();
-            InputOutputHub.Inputs.Add(input);
-            InputOutputHub.Outputs.Add(output);
+            //InputOutputHub.Inputs() = new List<MachineInput>();
+            //InputOutputHub.Outputs() = new List<MachineOutput>();
+            //InputOutputHub.Inputs().Add(input);
+            //InputOutputHub.Outputs().Add(output);
 
             //grab inventory reference
             inventory = GetComponent<Inventory>();
@@ -54,7 +54,7 @@ namespace FactoryBuilderTemplate
 
         public void Update()
         {
-            if(text)
+            if(text && inventory)
                 text.text = "" + inventory.GetOccupiedSlots() + "/" + inventory.SlotsAmount;
         }
 
@@ -76,10 +76,10 @@ namespace FactoryBuilderTemplate
             ContainerData data = new ContainerData();
             data.InventoryData = inventory.Save();
 
-            if(InputOutputHub.Outputs[0].ConnectedTo != null)
+            if(InputOutputHub.Outputs()[0].ConnectedTo != null)
             {
-                data.OutputConnectedToMachineInputID = InputOutputHub.Outputs[0].ConnectedTo.Parent.GetMachineID();
-                data.OutputConnectedToInputGameObjectName = InputOutputHub.Outputs[0].ConnectedTo.name;
+                data.OutputConnectedToMachineInputID = InputOutputHub.Outputs()[0].ConnectedTo.Parent.GetMachineID();
+                data.OutputConnectedToInputGameObjectName = InputOutputHub.Outputs()[0].ConnectedTo.name;
             }
 
             return JsonUtility.ToJson(data);

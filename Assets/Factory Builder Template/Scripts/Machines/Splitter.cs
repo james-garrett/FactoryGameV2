@@ -20,13 +20,12 @@ namespace FactoryBuilderTemplate
         void Start()
         {
             //register machine IO
-            InputOutputHub.Inputs = new List<MachineInput>();
-            InputOutputHub.Outputs = new List<MachineOutput>();
+            InputOutputHub = new IOHub(new List<MachineInput>(), new List<MachineOutput>());
 
-            InputOutputHub.Inputs.Add(Input);
-            InputOutputHub.Outputs.Add(Output1);
-            InputOutputHub.Outputs.Add(Output2);
-            InputOutputHub.Outputs.Add(Output3);
+            InputOutputHub.Inputs().Add(Input);
+            InputOutputHub.Outputs().Add(Output1);
+            InputOutputHub.Outputs().Add(Output2);
+            InputOutputHub.Outputs().Add(Output3);
               
             //set machine initialized flag
             IsInitializated = true;
@@ -52,7 +51,7 @@ namespace FactoryBuilderTemplate
                 lastOutput++;
                 lastOutput %= 3; 
 
-                if(InputOutputHub.Outputs[lastOutput].TryToSendItem(currentItem))
+                if(InputOutputHub.Outputs()[lastOutput].TryToSendItem(currentItem))
                 {
                     currentItem = null;
                     break;

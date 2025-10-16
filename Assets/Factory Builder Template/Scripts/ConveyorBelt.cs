@@ -1,8 +1,6 @@
 using FactoryBuilderTemplate;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class ConveyorBelt : Machine, ISaveable
@@ -26,44 +24,16 @@ public class ConveyorBelt : Machine, ISaveable
         {
             CalibrateBeltDirection();
         }
-
-        //if(onBelt != null && onBelt.Count > 0)
-        //{
-        //    for (int i = 0; i <= onBelt.Count - 1; i++)
-        //    {
-        //        Tuple<float, GameObject> currentBeltItem = onBelt[i];
-        //        if (currentBeltItem.Item2 == null)
-        //        {
-        //            onBelt.Remove(currentBeltItem);
-        //        } else 
-        //        {
-        //            currentBeltItem.Item2.GetComponent<Rigidbody>().velocity = speed * direction * Time.deltaTime;
-        //        }
-        //    }
-        //}
     }
 
+    /**
+     * Debug Method I made for showing the direction that items on belt will travel
+     */
     private void CalibrateBeltDirection()
     {
         direction = (Output.ConnectedTo.Parent.transform.position - transform.position).normalized;
         Debug.DrawLine(transform.position, transform.position + direction * 10, Color.red, Mathf.Infinity);
     }
-
-    // When something collides with the belt
-    //public void OnCollisionEnter(Collision collision)
-    //{
-    //    onBelt.Add(new Tuple<float, GameObject>(Time.deltaTime, collision.gameObject));
-    //}
-
-    //public void OnCollisionExit(Collision collision)
-    //{
-    //    GameObject collisionObject = collision.gameObject;
-    //    Tuple<float, GameObject> objectOnBelt = onBelt.Find(x => x.Item2.GetInstanceID() == collisionObject.GetInstanceID());
-    //    if(isObjectValidForDespawning(objectOnBelt))
-    //    {
-    //        onBelt.Remove(objectOnBelt);
-    //    }
-    //}
 
     public bool isObjectValidForDespawning(Tuple<float, GameObject> objectOnBelt)
     {
@@ -72,7 +42,7 @@ public class ConveyorBelt : Machine, ISaveable
     }
 
     [Header("Belt parameters")]
-    public float ItemsSpeed = 10;
+    public float ItemsSpeed = 1;
 
     //line renderer representing conveyor belt
     private LineRenderer lineRenderer;
@@ -141,11 +111,10 @@ public class ConveyorBelt : Machine, ISaveable
         itemsPool = new Dictionary<ItemDefinition, List<GameObject>>();
 
         //register machine IO
-        InputOutputHub.Inputs = new List<MachineInput>();
-        InputOutputHub.Outputs = new List<MachineOutput>();
+        InputOutputHub = new IOHub();
 
-        InputOutputHub.Inputs.Add(Input);
-        InputOutputHub.Outputs.Add(Output);
+        InputOutputHub.Inputs().Add(Input);
+        InputOutputHub.Outputs().Add(Output);
 
     }
 
@@ -223,10 +192,10 @@ public class ConveyorBelt : Machine, ISaveable
         data.BeltPointsWorldspace = pointsWorldspace;
 
         //save where output is connected to
-        if (InputOutputHub.Outputs[0].ConnectedTo != null)
+        if (InputOutputHub.Outputs()[0].ConnectedTo != null)
         {
-            data.OutputConnectedToMachineInputID = InputOutputHub.Outputs[0].ConnectedTo.Parent.GetMachineID();
-            data.OutputConnectedToInputGameObjectName = InputOutputHub.Outputs[0].ConnectedTo.name;
+            data.OutputConnectedToMachineInputID = InputOutputHub.Outputs()[0].ConnectedTo.Parent.GetMachineID();
+            data.OutputConnectedToInputGameObjectName = InputOutputHub.Outputs()[0].ConnectedTo.name;
         }
 
         data.ItemContainersList = itemsOnBelt;

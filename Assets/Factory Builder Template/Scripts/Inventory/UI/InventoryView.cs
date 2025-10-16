@@ -92,7 +92,7 @@ namespace FactoryBuilderTemplate
             List<Dropdown.OptionData> optionsList = new List<Dropdown.OptionData>();
             optionsList.Add(new Dropdown.OptionData("None"));
 
-            List<CraftingRecipe> possibleRecipes = FactoryBuilderMaster.Instance.GetAllPossibleRecipesForGivenCraftingMachine(craftingMachine.Type, craftingMachine.InputOutputHub.Inputs.Count, craftingMachine.InputOutputHub.Outputs.Count);
+            List<CraftingRecipe> possibleRecipes = FactoryBuilderMaster.Instance.GetAllPossibleRecipesForGivenCraftingMachine(craftingMachine.Type, craftingMachine.InputOutputHub.Inputs().Count, craftingMachine.InputOutputHub.Outputs().Count);
             foreach(CraftingRecipe recipe in possibleRecipes)
                 optionsList.Add(new Dropdown.OptionData(recipe.CraftingRecipeName));
 

@@ -45,8 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Parent: {fileID: 6352667313143935917}
   ConnectedTo: {fileID: 0}
-  spawnGap: {x: 0, y: 0, z: 0}
-  SpawnPosition: {x: 0, y: 0, z: 0}
+  SpawnPositionPrefab: {fileID: 0}
   spawnBufferZone: {fileID: 0}
   spawnZoneFree: 0
   spawnIntervalClearTimer: 0
@@ -95,6 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Parent: {fileID: 6352667313143935917}
   defaultBlockItem: {fileID: 0}
+  ConnectedTo: {fileID: 0}
 --- !u!1 &5270728807469949283
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,6 +141,7 @@ LineRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -240,11 +241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d44267ce4bd59a7479f3d5ca1d0d8b97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Inputs: []
-  Outputs: []
   Type: 3
   PrefabName: ConveyorBelt
-  speed: 500
+  speed: 5
   direction: {x: 0, y: 0, z: 0}
   validTimeMarginForDespawn: 2
   Input: {fileID: 7641965139524986556}
@@ -257,7 +256,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5270728807469949283}
-  m_Material: {fileID: 13400000, guid: d0b4af0ab78f8c247b5c492a51df6c2f, type: 2}
+  m_Material: {fileID: 13400000, guid: 0b807647b1ffe3c4698e967f2fa32a49, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4

@@ -20,18 +20,6 @@ namespace FactoryBuilderTemplate
          
         void Start()
         {
-            var newInputs = IOHub.CreateManyInput(3, this);
-            input1 = newInputs[0];
-            input2 = newInputs[1];
-            input3 = newInputs[2];
-            //create inputs and outputs lists
-
-            //register machine IO
-            InputOutputHub.Inputs.Add(input1);
-            InputOutputHub.Inputs.Add(input2);
-            InputOutputHub.Inputs.Add(input3);
-            InputOutputHub.Outputs.Add(output);
-
             //list used to push items to output from all 3 inputs evenly, to prevent connector pushing items to output only from first input when all input belts are clogged
             waitingRequests = new List<int>();
             
@@ -41,7 +29,7 @@ namespace FactoryBuilderTemplate
 
         public override bool ReceiveItem(Item item, MachineInput input)
         {
-            int currentInput = InputOutputHub.Inputs.IndexOf(input);
+            int currentInput = InputOutputHub.Inputs().IndexOf(input);
               
             //receive item only if last received item is already send to output
             bool canTakeItem = (this.item == null) && (waitingRequests.Count == 0 || waitingRequests[0] == currentInput);
@@ -74,10 +62,10 @@ namespace FactoryBuilderTemplate
         {
             ConnectorData data = new ConnectorData();
 
-            if(InputOutputHub.Outputs[0].ConnectedTo != null)
+            if(InputOutputHub.Outputs()[0].ConnectedTo != null)
             {
-                data.OutputConnectedToMachineInputID = InputOutputHub.Outputs[0].ConnectedTo.Parent.GetMachineID();
-                data.OutputConnectedToInputGameObjectName = InputOutputHub.Outputs[0].ConnectedTo.name;
+                data.OutputConnectedToMachineInputID = InputOutputHub.Outputs()[0].ConnectedTo.Parent.GetMachineID();
+                data.OutputConnectedToInputGameObjectName = InputOutputHub.Outputs()[0].ConnectedTo.name;
             }
 
             return JsonUtility.ToJson(data);

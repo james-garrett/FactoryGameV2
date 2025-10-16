@@ -11,10 +11,6 @@ namespace FactoryBuilderTemplate
     [RequireComponent(typeof(Inventory))]
     public class CraftingMachine : Machine, ISaveable
     {
-        //[Header("Crafting machine inputs and outputs")]
-        //public List<MachineInput> InputOutputHub.Inputs;
-        //public List<MachineOutput> InputOutputHub.Outputs;
-
         [Header("Recipe")]
         public CraftingRecipe Recipe;
 
@@ -28,23 +24,18 @@ namespace FactoryBuilderTemplate
         private Inventory inventory;
 
         private float currentTime, craftingTimeStart;
-        private bool isCrafting, lastIsCrafting;
+        private bool isCrafting;
         private float lastCraftingProgress;
 
         // Start is called before the first frame update
         void Start()
         {
-            //register machine IO
-
-            //IOHub.Inputs.AddRange(InputOutputHub.Inputs);
-            //IOHub.Outputs.AddRange(InputOutputHub.Outputs);
-            
             //check if supplied recipe is proper for this machine
             ValidateRecipe(Recipe);
 
             //grab inventory reference
             inventory = GetComponent<Inventory>();
-            inventory.ChangeSlotsAmount(InputOutputHub.Inputs.Count + InputOutputHub.Outputs.Count);
+            inventory.ChangeSlotsAmount(InputOutputHub.Inputs().Count + InputOutputHub.Outputs().Count);
 
             //set machine initialized flag
             IsInitializated = true;
@@ -65,7 +56,7 @@ namespace FactoryBuilderTemplate
                 isCrafting = false;
 
                 //clear inputs crafting inventory, keep outputs
-                for(int i = 0; i < InputOutputHub.Inputs.Count; i++)
+                for(int i = 0; i < InputOutputHub.Inputs().Count; i++)
                     inventory.Slots[i].Clear();
 
                 //send end crafting event
@@ -91,7 +82,7 @@ namespace FactoryBuilderTemplate
             }
 
             //check if inputs/outputs amount is enough for given recipe
-            if(!(recipe.Ingredients.Count <= InputOutputHub.Inputs.Count && recipe.CraftingResults.Count <= InputOutputHub.Outputs.Count))
+            if(!(recipe.Ingredients.Count <= InputOutputHub.Inputs().Count && recipe.CraftingResults.Count <= InputOutputHub.Outputs().Count))
             {
                 Debug.LogError("Crafting recipe supplied to this crafting machine is invalid! Amount of inputs or outputs is not enough for this recipe!");
                 return false;
@@ -153,7 +144,7 @@ namespace FactoryBuilderTemplate
             {
                 bool ingredientNeedMet = false;
 
-                for(int i = 0; i < InputOutputHub.Inputs.Count; i++)
+                for(int i = 0; i < InputOutputHub.Inputs().Count; i++)
                 {
                     InventorySlot slot = inventory.Slots[i];
                     if(ingredient.IngredientDefinition == slot.GetItemDefinition())
@@ -177,7 +168,7 @@ namespace FactoryBuilderTemplate
             for(int i = 0; i < Recipe.CraftingResults.Count; i++)
             {
                 CraftingRecipe.Ingredient result = Recipe.CraftingResults[i];
-                if(!inventory.Slots[InputOutputHub.Inputs.Count + i].HaveSpaceForItems(result.IngredientDefinition, result.IngredientAmount))
+                if(!inventory.Slots[InputOutputHub.Inputs().Count + i].HaveSpaceForItems(result.IngredientDefinition, result.IngredientAmount))
                     return false;
             }
 
@@ -187,7 +178,7 @@ namespace FactoryBuilderTemplate
         public override bool ReceiveItem(Item item, MachineInput input)
         {
             //check if this machine input is known
-            if(!InputOutputHub.Inputs.Contains(input))
+            if(!InputOutputHub.Inputs().Contains(input))
             {
                 Debug.LogError("Machine was trying to receive item from unknown machine input, make sure machine inputs are added to machine Inputs list in inspector!");
                 return false;
@@ -212,7 +203,7 @@ namespace FactoryBuilderTemplate
                 return false;
 
             //if item is on list of ingredients try to add it to inventory slot corresponding to machine input index
-            InventorySlot slot = inventory.Slots[InputOutputHub.Inputs.IndexOf(input)];
+            InventorySlot slot = inventory.Slots[InputOutputHub.Inputs().IndexOf(input)];
             return slot.Add(item);
         }
           
@@ -233,7 +224,7 @@ namespace FactoryBuilderTemplate
             if(isCrafting && currentTime - craftingTimeStart >= Recipe.CraftingTime)
             {
                 //remove ingredients needed to craft items
-                for(int i = 0; i < InputOutputHub.Inputs.Count; i++)
+                for(int i = 0; i < InputOutputHub.Inputs().Count; i++)
                 {
                     InventorySlot slot = inventory.Slots[i];
                     foreach(CraftingRecipe.Ingredient ingredient in Recipe.Ingredients)
@@ -254,7 +245,7 @@ namespace FactoryBuilderTemplate
                     CraftingRecipe.Ingredient result = Recipe.CraftingResults[i];
 
                     for(int j = 0; j < result.IngredientAmount; j++)
-                        inventory.Slots[InputOutputHub.Inputs.Count + i].Add(new Item(result.IngredientDefinition));
+                        inventory.Slots[InputOutputHub.Inputs().Count + i].Add(new Item(result.IngredientDefinition));
                 }
 
                 isCrafting = false;
@@ -268,11 +259,11 @@ namespace FactoryBuilderTemplate
             }
 
             //try to push items from output inventory to connected inputs
-            for(int i = 0; i < InputOutputHub.Outputs.Count; i++)
+            for(int i = 0; i < InputOutputHub.Outputs().Count; i++)
             {
-                if(!inventory.Slots[InputOutputHub.Inputs.Count + i].IsEmpty() && InputOutputHub.Outputs[i].TryToSendItem(inventory.Slots[InputOutputHub.Inputs.Count + i].GetLast()))
+                if(!inventory.Slots[InputOutputHub.Inputs().Count + i].IsEmpty() && InputOutputHub.Outputs()[i].TryToSendItem(inventory.Slots[InputOutputHub.Inputs().Count + i].GetLast()))
                 {
-                    inventory.Slots[InputOutputHub.Inputs.Count + i].GetLastAndRemove();
+                    inventory.Slots[InputOutputHub.Inputs().Count + i].GetLastAndRemove();
                 }
             }
         }
@@ -294,9 +285,9 @@ namespace FactoryBuilderTemplate
 
             //save outputs connections
             data.Outputs = new List<MachineOutputData>();
-            for(int i = 0; i < InputOutputHub.Outputs.Count; i++)
+            for(int i = 0; i < InputOutputHub.Outputs().Count; i++)
             {
-                MachineOutput output = InputOutputHub.Outputs[i];
+                MachineOutput output = InputOutputHub.Outputs()[i];
                 if(output.ConnectedTo != null) {
                     MachineOutputData outputData = new MachineOutputData();
                     outputData.OutputConnectedToMachineInputID = output.ConnectedTo.Parent.GetMachineID();
@@ -320,13 +311,13 @@ namespace FactoryBuilderTemplate
                 Recipe = FactoryBuilderMaster.Instance.AllRecipes[machineData.RecipeIndex];
 
             //restore where outputs where connected
-            for(int i = 0; i < InputOutputHub.Outputs.Count; i++)
+            for(int i = 0; i < InputOutputHub.Outputs().Count; i++)
             {
                 foreach(MachineOutputData outputData in machineData.Outputs)
                 {
                     if(outputData.index == i)
                     {
-                        InputOutputHub.Outputs[i].ConnectedTo = TryToFindMachineInput(outputData.OutputConnectedToMachineInputID, outputData.OutputConnectedToInputGameObjectName);
+                        InputOutputHub.Outputs()[i].ConnectedTo = TryToFindMachineInput(outputData.OutputConnectedToMachineInputID, outputData.OutputConnectedToInputGameObjectName);
                         break;
                     }
                 }

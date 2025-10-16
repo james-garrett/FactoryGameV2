@@ -1,59 +1,43 @@
 using FactoryBuilderTemplate;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class IOHub:MonoBehaviour
+public class IOHub
 
     //In the future this might be the interior container for buildings
 {
-    public List<MachineInput> Inputs = new List<MachineInput>();
-    public List<MachineOutput> Outputs = new List<MachineOutput>();
+    public List<MachineInput> inputs;
+    public List<MachineOutput> outputs;
 
     public MachineInput inputTemplate;
     public MachineOutput outputTemplate;
 
-    // Start is called before the first frame update
-    void Start()
+    public IOHub()
     {
-        
+        this.inputs = new List<MachineInput>();
+        this.outputs = new List<MachineOutput>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public IOHub(List<MachineInput> newInputs, List<MachineOutput> newOutputs)
     {
-        
+        this.inputs = newInputs;
+        this.outputs = newOutputs;
     }
 
-    //Todo - Create method which uses template IO to create inputs, outputs and return a reference to them
-    public static MachineInput CreateInput()
+    public List<MachineInput> Inputs()
     {
-        MachineInput newInput = new MachineInput();
-        return newInput;
+        return this.inputs;
+    }
+    public List<MachineOutput> Outputs()
+    {
+        return this.outputs;
     }
 
-    //Creates new Input or Output based on T declaration
-    public static List<MachineInput> CreateManyInput(int count, Machine parent)
+    public void SetInputs(List<MachineInput> newInputs)
     {
-        List<MachineInput> newIOList = new List<MachineInput>();
-        for (int i = 0; i < count; i++)
-        {
-            MachineInput newIO = new MachineInput();
-            newIO.Parent = parent;
-            newIOList.Add(newIO);
-        }
-        return newIOList;
+        this.inputs = newInputs;
     }
-
-    public static List<MachineOutput> CreateManyOutput(int count, Machine parent)
+    public void SetOutputs(List<MachineOutput> newOutputs)
     {
-        List<MachineOutput> newIOList = new List<MachineOutput>();
-        for (int i = 0; i < count; i++)
-        {
-            MachineOutput newIO = new MachineOutput();
-            newIO.Parent = parent;
-            newIOList.Add(newIO);
-        }
-        return newIOList;
+        this.outputs = newOutputs;
     }
 }

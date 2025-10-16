@@ -178,7 +178,7 @@ namespace FactoryBuilderTemplate
             }
 
             //scroll through possible machines to place using mouse wheel
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
                 currentPrefabIndex++;
                 currentPrefabIndex %= Prefabs.Count;
@@ -388,9 +388,9 @@ namespace FactoryBuilderTemplate
                             Machine machine = rayHit.transform.gameObject.GetComponentInParent<Machine>();
                             if (machine)
                             {
-                                if ((machine.InputOutputHub.Outputs.Count > 0) && !beltStartSelected)
+                                if ((machine.InputOutputHub.Outputs().Count > 0) && !beltStartSelected)
                                 {
-                                    foreach (MachineOutput output in machine.InputOutputHub.Outputs)
+                                    foreach (MachineOutput output in machine.InputOutputHub.Outputs())
                                     {
                                         if (output.ConnectedTo == null)
                                         {
@@ -405,7 +405,7 @@ namespace FactoryBuilderTemplate
                                             InfoText.text = SELECT_BELT_END;
                                     }
                                 }
-                                else if ((machine.InputOutputHub.Inputs.Count > 0))
+                                else if ((machine.InputOutputHub.Inputs().Count > 0))
                                 {
                                     //foreach (MachineInput input in machine.Inputs)
                                     //{
@@ -414,7 +414,7 @@ namespace FactoryBuilderTemplate
                                     //        beltInput = input;
                                     //    }
                                     //}
-                                    beltInput = machine.InputOutputHub.Inputs.Find(x => x.name == "Input1");
+                                    beltInput = machine.InputOutputHub.Inputs().Find(x => x.name == "Input1");
                                     if (beltInput != null)
                                     {
                                         beltPoints.Add(beltInput.transform.position);
