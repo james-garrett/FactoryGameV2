@@ -227,10 +227,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 923068a4a8dd64f4b973d1f661fd3bd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InputOutputHub: {fileID: 3799231400106420581, guid: 7d573f62fc182914299bcadb41cd6704, type: 3}
   Type: 3
   PrefabName: Connector
-  input1: {fileID: 0}
+  input1: {fileID: 7092975560426283161}
   input2: {fileID: 0}
   input3: {fileID: 0}
   output: {fileID: 5076773783970830723}
@@ -461,8 +460,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.55, y: 1, z: 1}
-  m_Center: {x: 0.25, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 1, y: 0, z: 0}
 --- !u!114 &7092975560426283161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,11 +485,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853876689619075962}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.1960404, y: 1, z: 1}
+  m_Center: {x: -0.5980203, y: 0, z: 0}
 --- !u!1 &3132175496016675261
 GameObject:
   m_ObjectHideFlags: 0

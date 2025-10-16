@@ -26,6 +26,7 @@ namespace FactoryBuilderTemplate
          
         void Start()
         {
+            InputOutputHub = new IOHub();
             //register machine IO
             //InputOutputHub.Inputs() = new List<MachineInput>();
             //InputOutputHub.Outputs() = new List<MachineOutput>();
@@ -49,7 +50,8 @@ namespace FactoryBuilderTemplate
 
         public override bool ReceiveItem(Item item, MachineInput input)
         {
-            return inventory.Add(item);
+            inventory.Add(item);
+            return true;
         }
 
         public void Update()
