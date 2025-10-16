@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ccb7f9877bd178479d740a7bc862171, type: 3}
+  m_Name: IronBar
+  m_EditorClassIdentifier: 
+  ItemName: Iron Bar
+  Stackable: 1
+  MaxInStack: 16
+  ItemIcon: {fileID: 21300000, guid: af927130233a50645b2c78282825fed0, type: 3}
+  VisualItemPrefab: {fileID: 501752778948231096, guid: 4b8997f89aeff6c488f791f262c9247c, type: 3}
+  CastShadowOnBelt: 1
+  ReceiveShadowOnBelt: 1
+  SpaceNeededInFrontOfItemOnBelt: 0.5
+  RenderInstanced: 1

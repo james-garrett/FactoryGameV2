@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ccb7f9877bd178479d740a7bc862171, type: 3}
+  m_Name: Coal
+  m_EditorClassIdentifier: 
+  ItemName: Coal
+  Stackable: 1
+  MaxInStack: 32
+  ItemIcon: {fileID: 21300000, guid: e9ca513bc5095d8478f4fec4f03e49d0, type: 3}
+  VisualItemPrefab: {fileID: 8069908434046410789, guid: da823a7f91ba9f8429796f5570d309be, type: 3}
+  CastShadowOnBelt: 1
+  ReceiveShadowOnBelt: 1
+  PivotOffset: {x: 0, y: 0, z: 0}
+  SpaceNeededInFrontOfItemOnBelt: 0.5
+  RenderInstanced: 1

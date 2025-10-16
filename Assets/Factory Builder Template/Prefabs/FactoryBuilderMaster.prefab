@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3305391906065530693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3305391906065530691}
+  - component: {fileID: 3305391906065530692}
+  m_Layer: 0
+  m_Name: FactoryBuilderMaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3305391906065530691
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3305391906065530693}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.8249426, y: 0.6323848, z: 13.193922}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3305391906065530692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3305391906065530693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2b2de6f53bf94418064f4e1e6d1858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpdatesPerSecond: 30
+  MachinesPrefabsFolderName: Machines
+  AllRecipes:
+  - {fileID: 11400000, guid: 671152e6bfb26ed4293faf3ea655865b, type: 2}
+  - {fileID: 11400000, guid: 69d4d23b9f577cd439286139b8305f8c, type: 2}
+  - {fileID: 11400000, guid: 9c7126d1a45bb064eb8afc2ffd19ff59, type: 2}
+  - {fileID: 11400000, guid: 4437f5b63ce4c254880554ad9d8122b0, type: 2}
+  AllItemDefinitions:
+  - {fileID: 11400000, guid: b12e4480d5050894ba84391a3c8d514a, type: 2}
+  - {fileID: 11400000, guid: 91c43409476f0554d9ab4c948949dca3, type: 2}
+  - {fileID: 11400000, guid: 23ca299aab33da84ba38b79010a0685c, type: 2}
+  - {fileID: 11400000, guid: df4bc03a17da5cb44b3aef9231f229e7, type: 2}
+  - {fileID: 11400000, guid: dc11668eebd1a74448b5ac82472629f9, type: 2}
+  - {fileID: 11400000, guid: 3ab0de21182b38740afd2f8c8d7ec85c, type: 2}
+  MachinesAmount: 0
+  MachinesUpdateTimeInMs: 0
+  MeasureUpdateTime: 1
+  RunOnSeparateThread: 0
