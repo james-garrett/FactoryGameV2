@@ -7,9 +7,10 @@ mix these concepts (on messily scrawled A3 sketch pads) that I hope to someday i
 ## Controls/How to Play ##
 
 C Button - Toggle Between Belt and Structure Building Modes
+
 TAB - Toggle structures 
 
-All structures have an output (red node) and an input (green node) that can be connected via conveyer belts. Conveyer belts can be placed by clicking on an output and then clicking on an input. The input system for belts is inconsistent and I find that sometiems clicking-and-dragging works, 
+All structures have an output (brown node) and an input (green node) that can be connected via conveyer belts. Conveyer belts can be placed by clicking on an output and then clicking on an input. The input system for belts is inconsistent and I find that sometiems clicking-and-dragging works, 
 other times clicking on two points works. This is likely a glitch due to the camera change perspective making the raycast detection less reliable.
 
 To start, build a Mining/Spawning structure, a connector and a Container. The moment you link a Spawner and a Connector, blocks will spawn on the conveyer belt and move towards their destination. If it's a connector, and the output isn't linked 
